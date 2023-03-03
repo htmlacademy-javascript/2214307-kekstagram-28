@@ -40,13 +40,13 @@ const createNewString = (string, length, extension) => {
 console.log(createNewString('1', 2, '0'));// Результат: строка '01'
 
 // Добавочный символ использован три раза
- console.log(createNewString('1', 4, '0'));// Результат: строка '0001'
+console.log(createNewString('1', 4, '0'));// Результат: строка '0001'
 
 // Добавочные символы обрезаны с конца
- console.log(createNewString('q', 4, 'werty'));// Результат: строка 'werq'
+console.log(createNewString('q', 4, 'werty'));// Результат: строка 'werq'
 
 // Добавочные символы использованы полтора раза
- console.log(createNewString('q', 4, 'we'));// Результат: строка 'wweq'
+console.log(createNewString('q', 4, 'we'));// Результат: строка 'wweq'
 
 // Добавочные символы не использованы, исходная строка не изменена
 console.log(createNewString('qwerty', 4, '0')); // Результат: строка 'qwerty'
