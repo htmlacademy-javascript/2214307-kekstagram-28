@@ -50,3 +50,6 @@ console.log(createNewString('q', 4, 'we'));// Результат: строка '
 
 // Добавочные символы не использованы, исходная строка не изменена
 console.log(createNewString('qwerty', 4, '0')); // Результат: строка 'qwerty'
+
+
+
