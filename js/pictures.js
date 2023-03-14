@@ -13,5 +13,4 @@ const createPhoto = (photo) => {
 };
 
 const renderPhotos = () => dataPhotos.forEach((photo) => pictures.append(createPhoto(photo)));
-
 export {renderPhotos};
