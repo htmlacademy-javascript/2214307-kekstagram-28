@@ -41,6 +41,5 @@ const createPost = () => ({
 });
 
 const createPosts = () => Array.from({ length: POST_COUNT }, createPost);
-console.log(createPosts());
 
 export{createPosts};
