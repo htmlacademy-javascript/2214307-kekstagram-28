@@ -20,14 +20,15 @@ const fillCommentCount = () => {
 const createComment = (comment) => {
   const commentTemplate = socialCommentsItem.cloneNode(true);
   const img = commentTemplate.querySelector('.social__picture');
-  commentTemplate.querySelector('.social__text').src = comment.message;
-  img.src = photo.avatar;
-  img.alt = photo.name;
-  return picture;
+  commentTemplate.querySelector('.social__text').textContent = comment.message;
+  img.src = comment.avatar;
+  img.alt = comment.name;
+  return commentTemplate;
 };
 
 const renderComments = () => {
   comments.forEach((comment) => socialCommentsList.append(createComment(comment)));
+  fillCommentCount();
 };
 
 const fillBigPicture = (photo) => {
@@ -46,6 +47,7 @@ const closeBigPicture = () => {
 };
 
 const openBigPicture = (photo) => {
+  socialCommentsList.innerHTML = '';
   bigPicture.classList.remove('hidden');
   document.body.classList.add('modal-open');
   fillBigPicture(photo);
