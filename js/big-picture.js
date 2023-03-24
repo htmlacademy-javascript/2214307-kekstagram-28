@@ -8,7 +8,7 @@ const socialCaption = document.querySelector('.social__caption');
 const socialCommentsList = document.querySelector('.social__comments');
 const socialCommentsItem = document.querySelector('.social__comment');
 const socialCommentsLoader = document.querySelector('.social__comments-loader');
-const socialCommentsCount = document.querySelector('.social__comments-count');
+const socialCommentsCount = document.querySelector('.social__comment-count');
 
 let comments = [];
 let showingComments = [];
@@ -27,14 +27,21 @@ const createComment = (comment) => {
 };
 
 const renderComments = () => {
-  comments.forEach((comment) => socialCommentsList.append(createComment(comment)));
+  const currentComments = comments.slice(showingComments, showingComments + COMMENT_COUNTER);
+  showingComments += COMMENT_COUNTER;
+  showingComments = Math.min(showingComments, comments.length);
+  currentComments.forEach((comment) => socialCommentsList.append(createComment(comment)));
   fillCommentCount();
+  if (showingComments >= comments.length) {
+    socialCommentsLoader.classList.add('hidden');
+    return;
+  }
+  socialCommentsLoader.classList.remove('hidden');
 };
 
 const fillBigPicture = (photo) => {
   comments = photo.comments;
-  socialCaption.textContent = photo.description;
-  bigPictureImg.alt = photo.description;
+  socialCaption.textContent = photo.descriptions;
   bigPictureImg.src = photo.url;
   likesCount.textContent = photo.likes;
 };
@@ -43,7 +50,10 @@ const closeBigPicture = () => {
   bigPicture.classList.add('hidden');
   document.body.classList.remove('modal-open');
   bigPictureCancel.removeEventListener('click', onBigPictureCancelClick);
-  document.removeEventListener('keydown', onBigPictureKeydown);
+  document.removeEventListener('keydown', onDocumentKeydown);
+  socialCommentsLoader.addEventListener('click', onSocialCommentsLoaderClick);
+  comments = [];
+  showingComments = 0;
 };
 
 const openBigPicture = (photo) => {
@@ -53,10 +63,16 @@ const openBigPicture = (photo) => {
   fillBigPicture(photo);
   renderComments();
   bigPictureCancel.addEventListener('click', onBigPictureCancelClick);
-  document.addEventListener('keydown', onBigPictureKeydown);
+  socialCommentsLoader.addEventListener('click', onSocialCommentsLoaderClick);
+  document.addEventListener('keydown', onDocumentKeydown);
 };
 
-function onBigPictureKeydown(evt) {
+function onSocialCommentsLoaderClick(evt) {
+  evt.preventDefault();
+  renderComments();
+}
+
+function onDocumentKeydown(evt) {
   if (evt.keycode === 'Escape' && !evt.target.closest('.social__footer-text')) {
     evt.preventDefault();
     closeBigPicture();
