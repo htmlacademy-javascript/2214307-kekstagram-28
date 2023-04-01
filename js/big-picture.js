@@ -84,5 +84,4 @@ function onBigPictureCancelClick(evt) {
   closeBigPicture();
 }
 
-
 export { openBigPicture };
