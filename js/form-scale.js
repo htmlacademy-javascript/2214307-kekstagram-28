@@ -21,7 +21,7 @@ const onBiggerButtonClick = () => {
 
 const onSmallerButtonClick = () => {
   if (scaleInput.value !== SCALE_RANGE_MIN) {
-    scaleInput.value = `${+scaleInput.value.replace('%', '') + SCALE_STEP}%`;
+    scaleInput.value = `${+scaleInput.value.replace('%', '') - SCALE_STEP}%`;
     changeScale(scaleInput.value);
   }
 };
