@@ -1,4 +1,4 @@
-import {activateScale, resetScale} from '../form-scale.js';
+import {activateScale, resetScale} from './form-scale.js';
 // import {changeEffect, resetFilter} from './form-effects.js';
 import {addValidator, resetPristine, validatePristine} from './form-validate.js';
 
