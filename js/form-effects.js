@@ -41,7 +41,7 @@ const UNIT = {
 };
 
 const image = document.querySelector('.img-upload__preview img');
-const sliderField = document.querySelector('.img-upload__effect-lavel');
+const sliderField = document.querySelector('.img-upload__effect-level');
 const effectLevel = document.querySelector('.effect-level__value');
 
 const createSlider = () => {
