@@ -14,7 +14,7 @@ const pristine = new Pristine(form, {
 
 const isValidComment = (comment) => comment.length <= MAX_COMMENTS_LENGTH;
 
-const createHashtagArray = (value) => value.trim().split(' ').filter((item) => item !== '');
+const createHashtagArray = (value) => value.trim().toLowerCase().split(' ').filter((item) => item !== '');
 
 const isValidHashtag = (value) => {
   if (!value) {
@@ -33,7 +33,7 @@ const isValidCount = (value) => {
 
 const isUniqueHashtags = (value) => {
   const hashtags = createHashtagArray(value);
-  return uniqHashtag = new Set(hashtags);
+  const uniqHashtag = new Set(hashtags);
   return uniqHashtag.size === hashtags.length;
 };
 
