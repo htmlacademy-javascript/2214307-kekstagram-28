@@ -29,5 +29,4 @@ const onGetFail = () => {
 };
 
 const getPicturesData = () => getData(GET_URL, onGetSuccess, onGetFail);
-
 export {getPicturesData};
