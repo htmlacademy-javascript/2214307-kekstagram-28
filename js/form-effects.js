@@ -89,3 +89,5 @@ const changeEffect = (evt) => {
 };
 
 export {changeEffect,resetFilter,createSlider};
+
+
