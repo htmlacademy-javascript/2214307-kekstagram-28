@@ -2,7 +2,7 @@ import { openBigPicture } from './big-picture.js';
 import { getData } from './api.js';
 
 const GET_URL = 'https://28.javascript.pages.academy/kekstagram/data';
-const ERROR_TIMEOUT = 3000;
+const ERROR_TIMEOUT = 5000;
 const thumbnailTemplate = document.querySelector('#picture').content.querySelector('.picture');
 const container = document.querySelector('.pictures');
 
