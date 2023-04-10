@@ -39,11 +39,11 @@ const renderComments = () => {
   socialCommentsLoader.classList.remove('hidden');
 };
 
-const fillBigPicture = (photo) => {
-  comments = photo.comments;
-  socialCaption.textContent = photo.descriptions;
-  bigPictureImg.src = photo.url;
-  likesCount.textContent = photo.likes;
+const fillBigPicture = (data) => {
+  comments = data.comments;
+  socialCaption.textContent = data.descriptions;
+  bigPictureImg.src = data.url;
+  likesCount.textContent = data.likes;
 };
 
 const closeBigPicture = () => {
@@ -56,11 +56,11 @@ const closeBigPicture = () => {
   showingComments = 0;
 };
 
-const openBigPicture = (photo) => {
+const openBigPicture = (data) => {
   socialCommentsList.innerHTML = '';
   bigPicture.classList.remove('hidden');
   document.body.classList.add('modal-open');
-  fillBigPicture(photo);
+  fillBigPicture(data);
   renderComments();
   bigPictureCancel.addEventListener('click', onBigPictureCancelClick);
   socialCommentsLoader.addEventListener('click', onSocialCommentsLoaderClick);

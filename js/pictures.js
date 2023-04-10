@@ -1,21 +1,47 @@
-import {createPosts} from './data.js';
-import {openBigPicture} from './big-picture.js';
+import { openBigPicture } from './big-picture.js';
+import { getData } from './api.js';
 
-const dataPhotos = createPosts();
-const pictureTemplate = document.querySelector('#picture').content.querySelector('.picture');
-const pictures = document.querySelector('.pictures');
+const GET_URL = 'https://28.javascript.pages.academy/kekstagram/data';
+const ERROR_TIMEOUT = 5000;
+const thumbnailTemplate = document.querySelector('#picture').content.querySelector('.picture');
+const container = document.querySelector('.pictures');
 
-const createPhoto = (photo) => {
-  const picture = pictureTemplate.cloneNode(true);
-  picture.querySelector('.picture__img').src = photo.url;
-  picture.querySelector('.picture__comments').textContent = photo.comments.length;
-  picture.querySelector('.picture__likes').textContent = photo.likes;
-  picture.addEventListener('click', (evt) => {
-    evt.preventDefault();
-    openBigPicture(photo);
+const createThumbnail = (data) => {
+  const thumbnail = thumbnailTemplate.cloneNode(true);
+  const img = thumbnail.querySelector('.picture_img');
+  img.src = data.url;
+  img.alt = data.description;
+  thumbnail.querySelector('.picture__comments').textContent = data.comments.length;
+  thumbnail.querySelector('.picture__likes').textContent = data.likes;
+
+  thumbnail.addEventListener('click', (event) => {
+    event.preventDefault();
+    openBigPicture(data);
   });
-  return picture;
+  return thumbnail;
 };
 
-const renderPhotos = () => dataPhotos.forEach((photo) => pictures.append(createPhoto(photo)));
-export {renderPhotos};
+const renderThumbnails = (data) => {
+  data.forEach((item) => container.append(createThumbnail(item)));
+};
+
+const onGetSuccess = (data) => renderThumbnails(data);
+const onGetFail = () => {
+  const errorBlock = document.createElement('div');
+  errorBlock.style.position = 'fixed';
+  errorBlock.style.top = '0';
+  errorBlock.style.width = '100%';
+  errorBlock.style.height = '60px';
+  errorBlock.style.color = 'red';
+  errorBlock.style.textAlign = 'center';
+  errorBlock.style.padding = 'center';
+  errorBlock.textContent = 'ПРоизошла Ошибка';
+  document.body.append(errorBlock);
+
+  setTimeout(() => {
+    errorBlock.remove();
+  }, ERROR_TIMEOUT);
+};
+
+const getPicturesData = () => getData(GET_URL, onGetSuccess, onGetFail);
+export { getPicturesData };
