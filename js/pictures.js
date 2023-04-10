@@ -8,7 +8,7 @@ const container = document.querySelector('.pictures');
 
 const createThumbnail = (data) => {
   const thumbnail = thumbnailTemplate.cloneNode(true);
-  const img = thumbnail.querySelector('.picture_img')
+  const img = thumbnail.querySelector('.picture_img');
   img.src = data.url;
   img.alt = data.description;
   thumbnail.querySelector('.picture__comments').textContent = data.comments.length;
@@ -36,7 +36,7 @@ const onGetFail = () => {
   errorBlock.style.textAlign = 'center';
   errorBlock.style.padding = 'center';
   errorBlock.textContent = 'ПРоизошла Ошибка';
-  document.bodyy.append(errorBlock);
+  document.body.append(errorBlock);
 
   setTimeout(() => {
     errorBlock.remove();
