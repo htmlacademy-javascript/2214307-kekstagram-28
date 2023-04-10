@@ -5,10 +5,11 @@ const GET_URL = 'https://28.javascript.pages.academy/kekstagram/data';
 const ERROR_TIMEOUT = 5000;
 const thumbnailTemplate = document.querySelector('#picture').content.querySelector('.picture');
 const container = document.querySelector('.pictures');
+const ERROR_TEXT = 'ПРоизошла Ошибка';
 
 const createThumbnail = (data) => {
   const thumbnail = thumbnailTemplate.cloneNode(true);
-  const img = thumbnail.querySelector('.picture_img');
+  const img = thumbnail.querySelector('.picture__img');
   img.src = data.url;
   img.alt = data.description;
   thumbnail.querySelector('.picture__comments').textContent = data.comments.length;
@@ -35,7 +36,7 @@ const onGetFail = () => {
   errorBlock.style.color = 'red';
   errorBlock.style.textAlign = 'center';
   errorBlock.style.padding = 'center';
-  errorBlock.textContent = 'ПРоизошла Ошибка';
+  errorBlock.textContent = ERROR_TEXT;
   document.body.append(errorBlock);
 
   setTimeout(() => {
