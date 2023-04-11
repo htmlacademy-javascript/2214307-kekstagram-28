@@ -12,13 +12,13 @@ const shuffleArray = (array) => {
   return array;
 };
 
-// const debounce = (callback, timeoutDelay) => {
-//   let timeoutId;
+const debounce = (callback, timeoutDelay) => {
+  let timeoutId;
 
-//   return(...rest) => {
-//     clearTimeout(timeoutId);
-//     timeoutId = setTimeout(() => callback.apply(this, rest), timeoutDelay);
-//   };
-// };
+  return(...rest) => {
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(() => callback.apply(this, rest), timeoutDelay);
+  };
+};
 
-export {shuffleArray};
+export {shuffleArray, debounce};
