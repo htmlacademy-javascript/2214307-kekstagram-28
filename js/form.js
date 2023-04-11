@@ -1,6 +1,7 @@
 import { activateScale, resetScale } from './form-scale.js';
 import { changeEffect, resetFilter, createSlider } from './form-effects.js';
 import { addValidator, resetPristine, validatePristine } from './form-validate.js';
+import { renderFailMessage, renderSuccesMessage } from './send-messages.js';
 import { sendData } from './api.js';
 
 const GET_URL = 'https://28.javascript.pages.academy/kekstagram';
@@ -11,11 +12,12 @@ const fileField = document.querySelector('#upload-file');
 const effectsField = document.querySelector('.effects');
 
 const onSendSuccess = () => {
-  confirm.log('все хорошо');
+  renderSuccesMessage();
+  closeModal();
 };
 
 const onSendFail = () => {
-  confirm.log('все плохо');
+  renderFailMessage();
 };
 
 const openModal = () => {
@@ -48,6 +50,9 @@ const onFormSubmit = (evt) => {
 function onDocumentKeydown(evt) {
   if (evt.key === 'Escape' && !evt.target.closest('.text__hashtags') &&
     !evt.target.closest('.text__description')) {
+    if (document.querySelector('.error')) {
+      return;
+    }
     evt.preventDefault();
     closeModal();
   }
