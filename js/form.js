@@ -1,13 +1,27 @@
-import {activateScale, resetScale} from './form-scale.js';
-import {changeEffect, resetFilter, createSlider} from './form-effects.js';
-import {addValidator, resetPristine, validatePristine} from './form-validate.js';
-import {getData} from './api.js';
+import { activateScale, resetScale } from './form-scale.js';
+import { changeEffect, resetFilter, createSlider } from './form-effects.js';
+import { addValidator, resetPristine, validatePristine } from './form-validate.js';
+import { renderFailMessage, renderSuccesMessage } from './send-messages.js';
+import { sendData } from './api.js';
 
+const GET_URL = 'https://28.javascript.pages.academy/kekstagram';
 const form = document.querySelector('.img-upload__form');
 const overlay = document.querySelector('.img-upload__overlay');
 const cancelButton = document.querySelector('#upload-cancel');
 const fileField = document.querySelector('#upload-file');
 const effectsField = document.querySelector('.effects');
+const submitButton = document.querySelector('.img-upload__submit');
+
+const onSendSuccess = () => {
+  renderSuccesMessage();
+  closeModal();
+  submitButton.disabled = false;
+};
+
+const onSendFail = () => {
+  renderFailMessage();
+  submitButton.disabled = false;
+};
 
 const openModal = () => {
   overlay.classList.remove('hidden');
@@ -30,14 +44,19 @@ const onFileInputChange = () => openModal();
 const onEffectsFieldChange = (evt) => changeEffect(evt);
 
 const onFormSubmit = (evt) => {
-  if (!validatePristine()) {
-    evt.preventDefault();
+  evt.preventDefault();
+  if (validatePristine()) {
+    submitButton.disabled = true;
+    sendData(GET_URL, onSendSuccess, onSendFail, new FormData(evt.target));
   }
 };
 
 function onDocumentKeydown(evt) {
   if (evt.key === 'Escape' && !evt.target.closest('.text__hashtags') &&
-  !evt.target.closest('.text__description')) {
+    !evt.target.closest('.text__description')) {
+    if (document.querySelector('.error')) {
+      return;
+    }
     evt.preventDefault();
     closeModal();
   }
@@ -53,4 +72,4 @@ const addFormAction = () => {
   createSlider();
 };
 
-export {addFormAction};
+export { addFormAction };
