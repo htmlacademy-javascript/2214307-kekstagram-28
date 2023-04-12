@@ -1,7 +1,7 @@
 import { activateScale, resetScale } from './form-scale.js';
 import { changeEffect, resetFilter, createSlider } from './form-effects.js';
 import { addValidator, resetPristine, validatePristine } from './form-validate.js';
-import { renderFailMessage, renderSuccesMessage } from './send-messages.js';
+import { renderFailMessage, renderSuccessMessage } from './send-messages.js';
 import { sendData } from './api.js';
 
 const GET_URL = 'https://28.javascript.pages.academy/kekstagram';
@@ -11,12 +11,7 @@ const cancelButton = document.querySelector('#upload-cancel');
 const fileField = document.querySelector('#upload-file');
 const effectsField = document.querySelector('.effects');
 const submitButton = document.querySelector('.img-upload__submit');
-
-const onSendSuccess = () => {
-  renderSuccesMessage();
-  closeModal();
-  submitButton.disabled = false;
-};
+const image = document.querySelector('.img-upload__preview img');
 
 const onSendFail = () => {
   renderFailMessage();
@@ -39,8 +34,17 @@ const closeModal = () => {
   document.removeEventListener('keydown', onDocumentKeydown);
 };
 
+const onSendSuccess = () => {
+  renderSuccessMessage();
+  closeModal();
+  submitButton.disabled = false;
+};
+
 const onCancelButtonClick = () => closeModal();
-const onFileInputChange = () => openModal();
+const onFileInputChange = (evt) => {
+  image.src = URL.createObjectURL(evt.target.files[0]);
+  openModal();
+};
 const onEffectsFieldChange = (evt) => changeEffect(evt);
 
 const onFormSubmit = (evt) => {
