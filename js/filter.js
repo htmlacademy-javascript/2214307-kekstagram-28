@@ -1,5 +1,5 @@
 import { renderThumbnails } from './pictures.js';
-import { shuffleArray, debounce} from './util.js';
+import { shuffleArray, debounce } from './util.js';
 
 const RANDOM_COMMENTS_COUNT = 10;
 const RERENDER_DELAY = 500;
@@ -41,7 +41,6 @@ const initFilter = (data) => {
   imgFilters.addEventListener('click', (evt) => {
     onImgFiltersClick(evt, data);
   });
-  // renderThumbnails(data);
 };
 
 export { initFilter };
