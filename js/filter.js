@@ -13,7 +13,7 @@ const rerenderThumbnails = (data, id) => {
   const dataCopy = data.slice();
   removeElements(document.querySelectorAll('.picture'));
   if (id === 'filter-discussed') {
-    const sortArray = dataCopy.sort((a, b) => a.comments.length - b.comments.length);
+    const sortArray = dataCopy.sort((a, b) => b.comments.length - a.comments.length);
     renderThumbnails(sortArray);
     return;
   }
