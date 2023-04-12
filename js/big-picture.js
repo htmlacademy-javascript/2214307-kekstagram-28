@@ -73,7 +73,7 @@ function onSocialCommentsLoaderClick(evt) {
 }
 
 function onDocumentKeydown(evt) {
-  if (evt.keycode === 'Escape' && !evt.target.closest('.social__footer-text')) {
+  if (evt.key === 'Escape' && !evt.target.closest('.social__footer-text')) {
     evt.preventDefault();
     closeBigPicture();
   }

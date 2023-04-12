@@ -15,7 +15,7 @@ const closeSuccessMessage = () => {
   successMessageClone = '';
 };
 
-const onDocumentKeydown = (evt) => {
+function onDocumentKeydown (evt) {
   if (evt.key === 'Escape') {
     evt.preventDefault();
     if (failMessageClone) {
@@ -24,7 +24,7 @@ const onDocumentKeydown = (evt) => {
     }
     closeSuccessMessage();
   }
-};
+}
 
 const onFailMessageButtonClick = (evt) => {
   evt.preventDefault();
@@ -35,19 +35,33 @@ const onSuccessMessageButtonClick = (evt) => {
   closeSuccessMessage();
 };
 
+const onFailMessageClick = (evt) => {
+  if (!evt.targer.closest('.error__inner')) {
+    closeFailMessage();
+  }
+};
+
+const onSuccessMessageClick = (evt) => {
+  if (!evt.target.closest('.success__inner')) {
+    closeSuccessMessage();
+  }
+};
+
 const renderFailMessage = () => {
   failMessageClone = failMessageTemplate.cloneNode(true);
   document.body.append((failMessageClone));
   document.addEventListener('keydown', onDocumentKeydown);
   failMessageClone.querySelector('.error__button').addEventListener('click', onFailMessageButtonClick);
+  failMessageClone.addEventListener('click', onFailMessageClick);
 };
 
-const renderSuccesMessage = () => {
+const renderSuccessMessage = () => {
   successMessageClone = successMessageTemplate.cloneNode(true);
   document.body.append(successMessageClone);
   document.addEventListener('keydown', onDocumentKeydown);
   successMessageClone.querySelector('.success__button').addEventListener('click',
     onSuccessMessageButtonClick);
+  successMessageClone.addEventListener('click', onSuccessMessageClick);
 };
 
-export { renderFailMessage, renderSuccesMessage };
+export { renderFailMessage, renderSuccessMessage };

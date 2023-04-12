@@ -1,5 +1,5 @@
 import { renderThumbnails } from './pictures.js';
-import { shuffleArray, debounce} from './util.js';
+import { shuffleArray, debounce } from './util.js';
 
 const RANDOM_COMMENTS_COUNT = 10;
 const RERENDER_DELAY = 500;
@@ -13,7 +13,7 @@ const rerenderThumbnails = (data, id) => {
   const dataCopy = data.slice();
   removeElements(document.querySelectorAll('.picture'));
   if (id === 'filter-discussed') {
-    const sortArray = dataCopy.sort((a, b) => a.comments.length - b.comments.length);
+    const sortArray = dataCopy.sort((a, b) => b.comments.length - a.comments.length);
     renderThumbnails(sortArray);
     return;
   }
@@ -41,7 +41,6 @@ const initFilter = (data) => {
   imgFilters.addEventListener('click', (evt) => {
     onImgFiltersClick(evt, data);
   });
-  // renderThumbnails(data);
 };
 
 export { initFilter };

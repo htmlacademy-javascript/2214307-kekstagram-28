@@ -1,11 +1,15 @@
 const RANGE_OPTIONS = {
+  default: {
+    min: 0,
+    max: 100,
+    step: 1,
+  },
   chrome: {
     effect: 'grayscale',
     min: 0,
     max: 1,
     step: 0.1,
   },
-
   sepia: {
     effect: 'sepia',
     min: 0,
@@ -36,7 +40,7 @@ const RANGE_OPTIONS = {
 };
 
 const UNIT = {
-  inver: '%',
+  invert: '%',
   blur: 'px',
 };
 
@@ -47,11 +51,11 @@ const effectLevel = document.querySelector('.effect-level__value');
 const createSlider = () => {
   noUiSlider.create(sliderField, {
     range: {
-      min: 0,
-      max: 100,
+      min: RANGE_OPTIONS.default.min,
+      max: RANGE_OPTIONS.default.max,
     },
-    start: 100,
-    step: 1,
+    start: RANGE_OPTIONS.default.max,
+    step: RANGE_OPTIONS.default.step,
     connect: 'lower',
   });
 };
@@ -69,7 +73,7 @@ const changeEffect = (evt) => {
 
   sliderField.classList.remove('hidden');
 
-  const {effect, min, max, step} = RANGE_OPTIONS[evt.target.value];
+  const { effect, min, max, step } = RANGE_OPTIONS[evt.target.value];
   const unit = UNIT[effect] ? UNIT[effect] : '';
 
   sliderField.noUiSlider.updateOptions({
@@ -88,6 +92,4 @@ const changeEffect = (evt) => {
   });
 };
 
-export {changeEffect,resetFilter,createSlider};
-
-
+export { changeEffect, resetFilter, createSlider };
